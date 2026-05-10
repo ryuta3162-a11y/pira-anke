@@ -548,8 +548,8 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // ▼▼▼ ここにGASでデプロイしたウェブアプリのURLを設定します ▼▼▼
-            const GAS_WEB_APP_URL = 'ここにGASのデプロイURLを貼り付けます';
+            // ▼▼▼ Vercel用 GASデプロイURL設定済み ▼▼▼
+            const GAS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyfd939d0wmFORuAzrIJ8WUvJJqVc8ukigaL0jBgJH-GAx2nNaGbj43lSFGsApcvSJB/exec';
 
             const form = document.getElementById('survey-form');
             const submitButton = document.getElementById('submit-button');
@@ -635,7 +635,7 @@
                     method: 'POST',
                     mode: 'no-cors', // クロスドメイン通信のため必須
                     headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'Content-Type': 'text/plain', // text/plainにすることでGAS側での文字化けやエラーを防ぎます
                     },
                     body: JSON.stringify(data)
                 })
