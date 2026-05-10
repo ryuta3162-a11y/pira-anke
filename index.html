@@ -70,6 +70,47 @@
             box-shadow: 0 4px 16px var(--brand-color-soft);
         }
 
+        /* アニメーションとエラー表示の追加 */
+        input[type="radio"]:checked + div,
+        input[type="checkbox"]:checked + div {
+            animation: popBounce 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        @keyframes popBounce {
+            0% { transform: scale(1); }
+            40% { transform: scale(0.85); }
+            100% { transform: scale(1); }
+        }
+
+        input[type="checkbox"] + div svg path {
+            stroke-dasharray: 24;
+            stroke-dashoffset: 24;
+        }
+        input[type="checkbox"]:checked + div svg path {
+            stroke-dashoffset: 0;
+            transition: stroke-dashoffset 0.4s cubic-bezier(0.65, 0, 0.45, 1) 0.15s;
+        }
+
+        .question-card.has-error {
+            border-color: #ef4444 !important;
+            background-color: #fffaf9 !important;
+            box-shadow: 0 4px 16px rgba(239, 68, 68, 0.1) !important;
+        }
+        .question-card.has-error .question-title {
+            color: #b91c1c;
+        }
+        .error-message {
+            display: none;
+        }
+        .question-card.has-error .error-message {
+            display: flex;
+            animation: slideDownFade 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        @keyframes slideDownFade {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* 追加ここまで */
+
         .question-title {
             font-size: 1rem;
             font-weight: 700;
@@ -170,7 +211,7 @@
                 </div>
 
                 <!-- Form -->
-                <form id="survey-form" class="space-y-6">
+                <form id="survey-form" class="space-y-6" novalidate>
 
                     <!-- Q1 -->
                     <div class="question-card">
@@ -557,25 +598,43 @@
             const successMessage = document.getElementById('success-message');
             const formSection = document.getElementById('form-section');
 
-            // --- 必須チェックボックスのカスタムバリデーション ---
-            // ※複数回答可の項目は、少なくとも1つ選択されているかチェックする
-            function validateCheckboxes(name) {
-                const checkboxes = document.querySelectorAll(`input[name="${name}"]`);
-                if (checkboxes.length === 0) return true; // 対象がない場合はOK
-                
-                // 「その他」のテキスト入力がある場合を考慮
-                const isChecked = Array.from(checkboxes).some(cb => cb.checked);
-                const firstCheckbox = checkboxes[0];
-                
-                if (!isChecked) {
-                    firstCheckbox.setCustomValidity('リスト内の項目のいずれかを選択してください。');
-                    return false;
+            // --- エラー表示用関数 ---
+            function showError(element, message) {
+                const card = element.closest('.question-card');
+                card.classList.add('has-error');
+                let errorEl = card.querySelector('.error-message');
+                if (!errorEl) {
+                    errorEl = document.createElement('div');
+                    errorEl.className = 'error-message text-red-500 text-sm font-bold mt-4 flex items-start gap-1.5';
+                    errorEl.innerHTML = `<svg class="w-4 h-4 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg><span>${message}</span>`;
+                    card.appendChild(errorEl);
                 } else {
-                    // 全てのエラーをクリア
-                    checkboxes.forEach(cb => cb.setCustomValidity(''));
-                    return true;
+                    errorEl.querySelector('span').textContent = message;
                 }
             }
+
+            function clearErrors() {
+                document.querySelectorAll('.question-card.has-error').forEach(card => {
+                    card.classList.remove('has-error');
+                });
+            }
+
+            // 入力・選択時にエラーを解除するリスナー
+            form.querySelectorAll('input, textarea').forEach(input => {
+                input.addEventListener('input', () => {
+                    const card = input.closest('.question-card');
+                    if (card && card.classList.contains('has-error')) {
+                        // 同じグループのチェックボックスのエラーも解除する
+                        if(input.type === 'checkbox' || input.type === 'radio') {
+                            const name = input.name;
+                            const groupCard = form.querySelector(`input[name="${name}"]`).closest('.question-card');
+                            if(groupCard) groupCard.classList.remove('has-error');
+                        } else {
+                            card.classList.remove('has-error');
+                        }
+                    }
+                });
+            });
 
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
@@ -585,14 +644,47 @@
                     return;
                 }
 
-                // 独自バリデーション（複数回答必須項目のチェック）
+                clearErrors();
                 let isValid = true;
-                isValid = validateCheckboxes('concerns') && isValid;
-                isValid = validateCheckboxes('reasons') && isValid;
-                isValid = validateCheckboxes('classes') && isValid;
+                let firstErrorElement = null;
 
-                // 標準のバリデーションを実行してエラーメッセージを表示
-                if (!form.reportValidity() || !isValid) {
+                // 必須のテキスト入力チェック
+                const textInputs = form.querySelectorAll('input[type="text"][required], textarea[required]');
+                textInputs.forEach(input => {
+                    if (!input.value.trim()) {
+                        isValid = false;
+                        showError(input, 'この項目は必須です。ご入力をお願いします。');
+                        if (!firstErrorElement) firstErrorElement = input.closest('.question-card');
+                    }
+                });
+
+                // ラジオボタンの必須チェック（experience）
+                const experienceChecked = form.querySelector('input[name="experience"]:checked');
+                if (!experienceChecked) {
+                    isValid = false;
+                    const radioGroup = form.querySelector('input[name="experience"]');
+                    showError(radioGroup, 'いずれかの項目を選択してください。');
+                    if (!firstErrorElement) firstErrorElement = radioGroup.closest('.question-card');
+                }
+
+                // 複数選択チェックボックスの必須チェック
+                const checkboxGroups = ['concerns', 'reasons', 'classes'];
+                checkboxGroups.forEach(name => {
+                    const checkboxes = form.querySelectorAll(`input[name="${name}"]`);
+                    const isChecked = Array.from(checkboxes).some(cb => cb.checked);
+                    if (!isChecked) {
+                        isValid = false;
+                        showError(checkboxes[0], 'リスト内の項目のいずれかを選択してください。');
+                        if (!firstErrorElement) firstErrorElement = checkboxes[0].closest('.question-card');
+                    }
+                });
+
+                if (!isValid) {
+                    // 最初のエラー位置へスムーズにスクロール
+                    if (firstErrorElement) {
+                        const y = firstErrorElement.getBoundingClientRect().top + window.scrollY - 100;
+                        window.scrollTo({ top: y, behavior: 'smooth' });
+                    }
                     return;
                 }
 
@@ -656,17 +748,6 @@
                         submitButton.innerHTML = '<span>アンケートを送信</span>';
                         submitButton.classList.remove('opacity-70');
                     }
-                });
-            });
-
-            // チェックボックスグループの状態が変わるたびにカスタムバリデーションをリセットする
-            const checkboxGroups = ['concerns', 'reasons', 'classes'];
-            checkboxGroups.forEach(name => {
-                const checkboxes = document.querySelectorAll(`input[name="${name}"]`);
-                checkboxes.forEach(cb => {
-                    cb.addEventListener('change', () => {
-                        checkboxes[0].setCustomValidity('');
-                    });
                 });
             });
         });
