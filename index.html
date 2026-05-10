@@ -81,13 +81,23 @@
             100% { transform: scale(1); }
         }
 
-        input[type="checkbox"] + div svg path {
+        /* チェックマークのアニメーション修正 */
+        .check-icon {
+            opacity: 0;
+            transform: scale(0.5);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        input[type="checkbox"]:checked + div .check-icon {
+            opacity: 1;
+            transform: scale(1);
+        }
+        .check-icon path {
             stroke-dasharray: 24;
             stroke-dashoffset: 24;
         }
-        input[type="checkbox"]:checked + div svg path {
+        input[type="checkbox"]:checked + div .check-icon path {
             stroke-dashoffset: 0;
-            transition: stroke-dashoffset 0.4s cubic-bezier(0.65, 0, 0.45, 1) 0.15s;
+            transition: stroke-dashoffset 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.15s;
         }
 
         .question-card.has-error {
@@ -279,7 +289,7 @@
                                 <div class="flex-shrink-0 pt-0.5">
                                     <input type="checkbox" name="concerns" value="肩こり" class="hidden peer">
                                     <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center peer-checked:bg-[#0ABAB5] peer-checked:border-[#0ABAB5] bg-white transition-all">
-                                        <svg class="w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-all scale-50 peer-checked:scale-100" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                                        <svg class="w-3.5 h-3.5 text-white check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
                                     </div>
                                 </div>
                                 <span class="text-gray-700 font-medium group-hover:text-[#0ABAB5] transition-colors">肩こり</span>
@@ -288,7 +298,7 @@
                                 <div class="flex-shrink-0 pt-0.5">
                                     <input type="checkbox" name="concerns" value="腰痛" class="hidden peer">
                                     <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center peer-checked:bg-[#0ABAB5] peer-checked:border-[#0ABAB5] bg-white transition-all">
-                                        <svg class="w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-all scale-50 peer-checked:scale-100" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                                        <svg class="w-3.5 h-3.5 text-white check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
                                     </div>
                                 </div>
                                 <span class="text-gray-700 font-medium group-hover:text-[#0ABAB5] transition-colors">腰痛</span>
@@ -297,7 +307,7 @@
                                 <div class="flex-shrink-0 pt-0.5">
                                     <input type="checkbox" name="concerns" value="猫背" class="hidden peer">
                                     <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center peer-checked:bg-[#0ABAB5] peer-checked:border-[#0ABAB5] bg-white transition-all">
-                                        <svg class="w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-all scale-50 peer-checked:scale-100" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                                        <svg class="w-3.5 h-3.5 text-white check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
                                     </div>
                                 </div>
                                 <span class="text-gray-700 font-medium group-hover:text-[#0ABAB5] transition-colors">猫背</span>
@@ -306,7 +316,7 @@
                                 <div class="flex-shrink-0 pt-0.5">
                                     <input type="checkbox" name="concerns" value="反り腰" class="hidden peer">
                                     <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center peer-checked:bg-[#0ABAB5] peer-checked:border-[#0ABAB5] bg-white transition-all">
-                                        <svg class="w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-all scale-50 peer-checked:scale-100" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                                        <svg class="w-3.5 h-3.5 text-white check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
                                     </div>
                                 </div>
                                 <span class="text-gray-700 font-medium group-hover:text-[#0ABAB5] transition-colors">反り腰</span>
@@ -315,7 +325,7 @@
                                 <div class="flex-shrink-0 pt-0.5">
                                     <input type="checkbox" name="concerns" value="体力の衰え・疲れやすさ" class="hidden peer">
                                     <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center peer-checked:bg-[#0ABAB5] peer-checked:border-[#0ABAB5] bg-white transition-all">
-                                        <svg class="w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-all scale-50 peer-checked:scale-100" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                                        <svg class="w-3.5 h-3.5 text-white check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
                                     </div>
                                 </div>
                                 <span class="text-gray-700 font-medium group-hover:text-[#0ABAB5] transition-colors">体力の衰え・疲れやすさ</span>
@@ -324,7 +334,7 @@
                                 <div class="flex-shrink-0 pt-0.5">
                                     <input type="checkbox" name="concerns" value="柔軟性を高めたい" class="hidden peer">
                                     <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center peer-checked:bg-[#0ABAB5] peer-checked:border-[#0ABAB5] bg-white transition-all">
-                                        <svg class="w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-all scale-50 peer-checked:scale-100" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                                        <svg class="w-3.5 h-3.5 text-white check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
                                     </div>
                                 </div>
                                 <span class="text-gray-700 font-medium group-hover:text-[#0ABAB5] transition-colors">柔軟性を高めたい</span>
@@ -333,7 +343,7 @@
                                 <div class="flex-shrink-0 pt-0.5">
                                     <input type="checkbox" name="concerns" value="ダイエット・ボディメイク" class="hidden peer">
                                     <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center peer-checked:bg-[#0ABAB5] peer-checked:border-[#0ABAB5] bg-white transition-all">
-                                        <svg class="w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-all scale-50 peer-checked:scale-100" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                                        <svg class="w-3.5 h-3.5 text-white check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
                                     </div>
                                 </div>
                                 <span class="text-gray-700 font-medium group-hover:text-[#0ABAB5] transition-colors">ダイエット・ボディメイク</span>
@@ -342,7 +352,7 @@
                                 <div class="flex-shrink-0 pt-0.5">
                                     <input type="checkbox" name="concerns" value="運動不足解消" class="hidden peer">
                                     <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center peer-checked:bg-[#0ABAB5] peer-checked:border-[#0ABAB5] bg-white transition-all">
-                                        <svg class="w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-all scale-50 peer-checked:scale-100" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                                        <svg class="w-3.5 h-3.5 text-white check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
                                     </div>
                                 </div>
                                 <span class="text-gray-700 font-medium group-hover:text-[#0ABAB5] transition-colors">運動不足解消</span>
@@ -351,7 +361,7 @@
                                 <div class="flex-shrink-0 pt-0.5">
                                     <input type="checkbox" name="concerns" value="リフレッシュ・ストレス解消" class="hidden peer">
                                     <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center peer-checked:bg-[#0ABAB5] peer-checked:border-[#0ABAB5] bg-white transition-all">
-                                        <svg class="w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-all scale-50 peer-checked:scale-100" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                                        <svg class="w-3.5 h-3.5 text-white check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
                                     </div>
                                 </div>
                                 <span class="text-gray-700 font-medium group-hover:text-[#0ABAB5] transition-colors">リフレッシュ・ストレス解消</span>
@@ -362,7 +372,7 @@
                                 <label class="flex items-center space-x-3 cursor-pointer group flex-shrink-0">
                                     <input type="checkbox" name="concerns" value="その他" class="hidden peer" id="concerns-other-check">
                                     <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center peer-checked:bg-[#0ABAB5] peer-checked:border-[#0ABAB5] bg-white transition-all">
-                                        <svg class="w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-all scale-50 peer-checked:scale-100" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                                        <svg class="w-3.5 h-3.5 text-white check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
                                     </div>
                                     <span class="text-gray-700 font-medium group-hover:text-[#0ABAB5] transition-colors whitespace-nowrap">その他:</span>
                                 </label>
@@ -379,7 +389,7 @@
                                 <div class="flex-shrink-0 pt-0.5">
                                     <input type="checkbox" name="reasons" value="マシンのサポートがあるから、運動が苦手でも動ける" class="hidden peer">
                                     <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center peer-checked:bg-[#0ABAB5] peer-checked:border-[#0ABAB5] bg-white transition-all">
-                                        <svg class="w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-all scale-50 peer-checked:scale-100" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                                        <svg class="w-3.5 h-3.5 text-white check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
                                     </div>
                                 </div>
                                 <span class="text-gray-700 font-medium group-hover:text-[#0ABAB5] transition-colors">マシンのサポートがあるから、運動が苦手でも動ける</span>
@@ -388,7 +398,7 @@
                                 <div class="flex-shrink-0 pt-0.5">
                                     <input type="checkbox" name="reasons" value="バネの抵抗感がよくて楽しい" class="hidden peer">
                                     <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center peer-checked:bg-[#0ABAB5] peer-checked:border-[#0ABAB5] bg-white transition-all">
-                                        <svg class="w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-all scale-50 peer-checked:scale-100" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                                        <svg class="w-3.5 h-3.5 text-white check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
                                     </div>
                                 </div>
                                 <span class="text-gray-700 font-medium group-hover:text-[#0ABAB5] transition-colors">バネの抵抗感がよくて楽しい</span>
@@ -397,7 +407,7 @@
                                 <div class="flex-shrink-0 pt-0.5">
                                     <input type="checkbox" name="reasons" value="普段使わない筋肉を使っている感覚がある" class="hidden peer">
                                     <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center peer-checked:bg-[#0ABAB5] peer-checked:border-[#0ABAB5] bg-white transition-all">
-                                        <svg class="w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-all scale-50 peer-checked:scale-100" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                                        <svg class="w-3.5 h-3.5 text-white check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
                                     </div>
                                 </div>
                                 <span class="text-gray-700 font-medium group-hover:text-[#0ABAB5] transition-colors">普段使わない筋肉を使っている感覚がある</span>
@@ -406,7 +416,7 @@
                                 <div class="flex-shrink-0 pt-0.5">
                                     <input type="checkbox" name="reasons" value="身体の伸びを感じやすい" class="hidden peer">
                                     <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center peer-checked:bg-[#0ABAB5] peer-checked:border-[#0ABAB5] bg-white transition-all">
-                                        <svg class="w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-all scale-50 peer-checked:scale-100" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                                        <svg class="w-3.5 h-3.5 text-white check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
                                     </div>
                                 </div>
                                 <span class="text-gray-700 font-medium group-hover:text-[#0ABAB5] transition-colors">身体の伸びを感じやすい</span>
@@ -415,7 +425,7 @@
                                 <div class="flex-shrink-0 pt-0.5">
                                     <input type="checkbox" name="reasons" value="インナーマッスルへの『効いてる感』がある" class="hidden peer">
                                     <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center peer-checked:bg-[#0ABAB5] peer-checked:border-[#0ABAB5] bg-white transition-all">
-                                        <svg class="w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-all scale-50 peer-checked:scale-100" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                                        <svg class="w-3.5 h-3.5 text-white check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
                                     </div>
                                 </div>
                                 <span class="text-gray-700 font-medium group-hover:text-[#0ABAB5] transition-colors">インナーマッスルへの『効いてる感』がある</span>
@@ -424,7 +434,7 @@
                                 <div class="flex-shrink-0 pt-0.5">
                                     <input type="checkbox" name="reasons" value="集中して動くことで、頭の中がスッキリしてリフレッシュできる" class="hidden peer">
                                     <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center peer-checked:bg-[#0ABAB5] peer-checked:border-[#0ABAB5] bg-white transition-all">
-                                        <svg class="w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-all scale-50 peer-checked:scale-100" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                                        <svg class="w-3.5 h-3.5 text-white check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
                                     </div>
                                 </div>
                                 <span class="text-gray-700 font-medium group-hover:text-[#0ABAB5] transition-colors">集中して動くことで、頭の中がスッキリしてリフレッシュできる</span>
@@ -433,7 +443,7 @@
                                 <div class="flex-shrink-0 pt-0.5">
                                     <input type="checkbox" name="reasons" value="効果がわかりやすい" class="hidden peer">
                                     <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center peer-checked:bg-[#0ABAB5] peer-checked:border-[#0ABAB5] bg-white transition-all">
-                                        <svg class="w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-all scale-50 peer-checked:scale-100" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                                        <svg class="w-3.5 h-3.5 text-white check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
                                     </div>
                                 </div>
                                 <span class="text-gray-700 font-medium group-hover:text-[#0ABAB5] transition-colors">効果がわかりやすい</span>
@@ -444,7 +454,7 @@
                                 <label class="flex items-center space-x-3 cursor-pointer group flex-shrink-0">
                                     <input type="checkbox" name="reasons" value="その他" class="hidden peer" id="reasons-other-check">
                                     <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center peer-checked:bg-[#0ABAB5] peer-checked:border-[#0ABAB5] bg-white transition-all">
-                                        <svg class="w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-all scale-50 peer-checked:scale-100" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                                        <svg class="w-3.5 h-3.5 text-white check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
                                     </div>
                                     <span class="text-gray-700 font-medium group-hover:text-[#0ABAB5] transition-colors whitespace-nowrap">その他:</span>
                                 </label>
@@ -479,7 +489,7 @@
                                 <div class="flex-shrink-0 pt-0.5">
                                     <input type="checkbox" name="classes" value="トータルボディメイク★" class="hidden peer">
                                     <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center peer-checked:bg-[#0ABAB5] peer-checked:border-[#0ABAB5] bg-white transition-all">
-                                        <svg class="w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-all scale-50 peer-checked:scale-100" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                                        <svg class="w-3.5 h-3.5 text-white check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
                                     </div>
                                 </div>
                                 <span class="text-gray-700 font-medium group-hover:text-[#0ABAB5] transition-colors">トータルボディメイク★</span>
@@ -488,7 +498,7 @@
                                 <div class="flex-shrink-0 pt-0.5">
                                     <input type="checkbox" name="classes" value="魅せるバック&アームズ★★" class="hidden peer">
                                     <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center peer-checked:bg-[#0ABAB5] peer-checked:border-[#0ABAB5] bg-white transition-all">
-                                        <svg class="w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-all scale-50 peer-checked:scale-100" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                                        <svg class="w-3.5 h-3.5 text-white check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
                                     </div>
                                 </div>
                                 <span class="text-gray-700 font-medium group-hover:text-[#0ABAB5] transition-colors">魅せるバック&アームズ★★</span>
@@ -497,7 +507,7 @@
                                 <div class="flex-shrink-0 pt-0.5">
                                     <input type="checkbox" name="classes" value="ほぐす美肩★★" class="hidden peer">
                                     <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center peer-checked:bg-[#0ABAB5] peer-checked:border-[#0ABAB5] bg-white transition-all">
-                                        <svg class="w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-all scale-50 peer-checked:scale-100" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                                        <svg class="w-3.5 h-3.5 text-white check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
                                     </div>
                                 </div>
                                 <span class="text-gray-700 font-medium group-hover:text-[#0ABAB5] transition-colors">ほぐす美肩★★</span>
@@ -506,7 +516,7 @@
                                 <div class="flex-shrink-0 pt-0.5">
                                     <input type="checkbox" name="classes" value="チェストオープン★★" class="hidden peer">
                                     <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center peer-checked:bg-[#0ABAB5] peer-checked:border-[#0ABAB5] bg-white transition-all">
-                                        <svg class="w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-all scale-50 peer-checked:scale-100" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                                        <svg class="w-3.5 h-3.5 text-white check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
                                     </div>
                                 </div>
                                 <span class="text-gray-700 font-medium group-hover:text-[#0ABAB5] transition-colors">チェストオープン★★</span>
@@ -515,7 +525,7 @@
                                 <div class="flex-shrink-0 pt-0.5">
                                     <input type="checkbox" name="classes" value="ウエストシェイプ★★★" class="hidden peer">
                                     <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center peer-checked:bg-[#0ABAB5] peer-checked:border-[#0ABAB5] bg-white transition-all">
-                                        <svg class="w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-all scale-50 peer-checked:scale-100" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                                        <svg class="w-3.5 h-3.5 text-white check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
                                     </div>
                                 </div>
                                 <span class="text-gray-700 font-medium group-hover:text-[#0ABAB5] transition-colors">ウエストシェイプ★★★</span>
@@ -524,7 +534,7 @@
                                 <div class="flex-shrink-0 pt-0.5">
                                     <input type="checkbox" name="classes" value="桃尻メイク★★★" class="hidden peer">
                                     <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center peer-checked:bg-[#0ABAB5] peer-checked:border-[#0ABAB5] bg-white transition-all">
-                                        <svg class="w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-all scale-50 peer-checked:scale-100" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                                        <svg class="w-3.5 h-3.5 text-white check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
                                     </div>
                                 </div>
                                 <span class="text-gray-700 font-medium group-hover:text-[#0ABAB5] transition-colors">桃尻メイク★★★</span>
@@ -533,7 +543,7 @@
                                 <div class="flex-shrink-0 pt-0.5">
                                     <input type="checkbox" name="classes" value="魅せるバック&アームズVer2★★★" class="hidden peer">
                                     <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center peer-checked:bg-[#0ABAB5] peer-checked:border-[#0ABAB5] bg-white transition-all">
-                                        <svg class="w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-all scale-50 peer-checked:scale-100" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                                        <svg class="w-3.5 h-3.5 text-white check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
                                     </div>
                                 </div>
                                 <span class="text-gray-700 font-medium group-hover:text-[#0ABAB5] transition-colors">魅せるバック&アームズVer2★★★</span>
@@ -542,7 +552,7 @@
                                 <div class="flex-shrink-0 pt-0.5">
                                     <input type="checkbox" name="classes" value="アーム&ショルダースタビリティー★★★" class="hidden peer">
                                     <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center peer-checked:bg-[#0ABAB5] peer-checked:border-[#0ABAB5] bg-white transition-all">
-                                        <svg class="w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-all scale-50 peer-checked:scale-100" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                                        <svg class="w-3.5 h-3.5 text-white check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
                                     </div>
                                 </div>
                                 <span class="text-gray-700 font-medium group-hover:text-[#0ABAB5] transition-colors">アーム&ショルダースタビリティー★★★</span>
