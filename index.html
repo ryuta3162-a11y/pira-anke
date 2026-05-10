@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>マシンピラティス アンケート - JOYFIT24経堂</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* 女性らしく清潔感のあるティファニーブルー系のカラーパレット */
+            --page-bg-light: #F4F9F9;
+            --brand-color: #0ABAB5; /* ティファニーブルー */
+            --brand-color-dark: #099A9A;
+            --brand-color-soft: rgba(10, 186, 181, 0.15);
+            --logo-wine-bg: #A63646; /* 元のJOYFIT24ロゴ背景色 */
+            --ink: #334155; /* 柔らかいダークグレー */
+            --muted: #64748B;
+            --line: #E2E8F0;
+            --line-strong: rgba(51, 65, 85, 0.15);
+            --surface: #FFFFFF;
+            --radius: 0.75rem;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            color: var(--ink);
+            min-height: 100vh;
+            background-color: var(--page-bg-light);
+            position: relative;
+            overflow-x: hidden;
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background:
+                radial-gradient(1200px 600px at 50% -10%, rgba(10,186,181,0.1), transparent 60%),
+                radial-gradient(900px 500px at 10% 20%, rgba(255,255,255,0.8), transparent 55%),
+                radial-gradient(900px 500px at 90% 20%, rgba(255,255,255,0.8), transparent 55%);
+        }
+
+        .font-eng { font-family: 'Montserrat', sans-serif; letter-spacing: 0.05em; }
+        .text-brand-color { color: var(--brand-color) !important; }
+        .bg-brand-color { background-color: var(--brand-color) !important; }
+
+        .lp-card {
+            background: var(--surface) !important;
+            color: var(--ink);
+            border: 1px solid rgba(10, 186, 181, 0.2);
+            border-radius: 1.25rem;
+            border-top: 4px solid var(--brand-color);
+            box-shadow:
+                0 10px 25px -5px rgba(10, 186, 181, 0.1),
+                0 8px 10px -6px rgba(0, 0, 0, 0.05);
+        }
+
+        .question-card {
+            background: #FFFFFF;
+            border: 1px solid var(--line);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .question-card:focus-within {
+            border-color: var(--brand-color);
+            box-shadow: 0 4px 16px var(--brand-color-soft);
+        }
+
+        .question-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--ink);
+            margin-bottom: 1.25rem;
+            line-height: 1.6;
+        }
+        
+        .required-mark {
+            color: var(--brand-color);
+            margin-left: 0.25rem;
+            font-weight: bold;
+        }
+
+        .input-underline {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            color: var(--ink) !important;
+            background-color: #FFFFFF !important;
+            border: 1px solid var(--line) !important;
+            border-radius: var(--radius);
+            transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+            box-shadow: 0 2px 0 rgba(0,0,0,0.01) inset;
+        }
+        .input-underline::placeholder { color: #9CA3AF; }
+        .input-underline:focus {
+            outline: none;
+            border-color: var(--brand-color) !important;
+            background-color: var(--surface) !important;
+            box-shadow: 0 0 0 3px var(--brand-color-soft) !important;
+        }
+        
+        textarea.input-underline {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .btn-solid {
+            width: 100%;
+            background-color: var(--brand-color) !important;
+            color: #fff;
+            font-weight: 800;
+            border: 1px solid rgba(255,255,255,0.4);
+            border-radius: var(--radius);
+            padding: 1rem 1.5rem;
+            letter-spacing: 0.06em;
+            transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+            box-shadow:
+                0 16px 30px rgba(10, 186, 181, 0.25),
+                0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+        .btn-solid:hover {
+            transform: translateY(-1px);
+            background-color: var(--brand-color-dark) !important;
+            box-shadow: 0 14px 26px rgba(10, 186, 181, 0.3);
+        }
+
+        main { position: relative; z-index: 1; }
+
+        .site-footer-bar {
+            background-color: var(--logo-wine-bg);
+            padding: 1.25rem 1rem;
+            border-radius: 0 !important;
+            width: 100vw;
+            margin-left: calc(50% - 50vw);
+            margin-right: calc(50% - 50vw);
+        }
+        .site-footer-bar .footer-logo-img {
+            height: 2rem;
+            width: auto;
+            max-width: min(100%, 220px);
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <main class="w-full max-w-3xl z-10 space-y-6 mx-auto pt-8 px-4 pb-16 sm:pb-20">
+
+        <section class="lp-card p-6 md:p-10" id="form-section">
+            <div id="form-container">
+                <!-- Header -->
+                <div class="mb-8">
+                    <h1 class="text-2xl md:text-3xl font-black text-gray-800 leading-tight mb-4 border-b-2 border-[#0ABAB5] pb-4 inline-block">
+                        マシンピラティス<br class="md:hidden">（リフォーマー）に<br class="md:hidden">関するアンケート
+                    </h1>
+                    
+                    <div class="bg-[#F4F9F9] border border-[#0ABAB5]/20 rounded-xl p-5 text-sm text-gray-700 leading-relaxed">
+                        <p class="mb-2">いつもレッスンにご参加いただきありがとうございます。</p>
+                        <p>リフォーマーの好きなところ、身体の変化など、感じたままを自由に教えてください。</p>
+                        <p class="text-[#0ABAB5] font-bold mt-4">* 必須の質問です</p>
+                    </div>
+                </div>
+
+                <!-- Form -->
+                <form id="survey-form" class="space-y-6">
+
+                    <!-- Q1 -->
+                    <div class="question-card">
+                        <h3 class="question-title">お名前（フルネーム）<span class="required-mark">*</span></h3>
+                        <input type="text" name="name" required placeholder="回答を入力" class="input-underline h-12">
+                    </div>
+
+                    <!-- Q2 -->
+                    <div class="question-card">
+                        <h3 class="question-title">リフォーマー歴はどのくらいですか？<span class="required-mark">*</span></h3>
+                        <div class="space-y-3">
+                            <label class="flex items-center space-x-3 cursor-pointer group">
+                                <div class="flex-shrink-0">
+                                    <input type="radio" name="experience" value="1か月未満" class="hidden peer" required>
+                                    <div class="w-5 h-5 border-2 border-gray-300 rounded-full flex items-center justify-center peer-checked:border-[#0ABAB5] bg-white transition-all">
+                                        <div class="w-2.5 h-2.5 bg-[#0ABAB5] rounded-full opacity-0 peer-checked:opacity-100 transition-all scale-50 peer-checked:scale-100"></div>
+                                    </div>
+                                </div>
+                                <span class="text-gray-700 font-medium group-hover:text-[#0ABAB5] transition-colors">1か月未満</span>
+                            </label>
+                            <label class="flex items-center space-x-3 cursor-pointer group">
+                                <div class="flex-shrink-0">
+                                    <input type="radio" name="experience" value="1～3か月" class="hidden peer">
+                                    <div class="w-5 h-5 border-2 border-gray-300 rounded-full flex items-center justify-center peer-checked:border-[#0ABAB5] bg-white transition-all">
+                                        <div class="w-2.5 h-2.5 bg-[#0ABAB5] rounded-full opacity-0 peer-checked:opacity-100 transition-all scale-50 peer-checked:scale-100"></div>
+                                    </div>
+                                </div>
+                                <span class="text-gray-700 font-medium group-hover:text-[#0ABAB5] transition-colors">1～3か月</span>
+                            </label>
+                            <label class="flex items-center space-x-3 cursor-pointer group">
+                                <div class="flex-shrink-0">
+                                    <input type="radio" name="experience" value="4～8か月" class="hidden peer">
+                                    <div class="w-5 h-5 border-2 border-gray-300 rounded-full flex items-center justify-center peer-checked:border-[#0ABAB5] bg-white transition-all">
+                                        <div class="w-2.5 h-2.5 bg-[#0ABAB5] rounded-full opacity-0 peer-checked:opacity-100 transition-all scale-50 peer-checked:scale-100"></div>
+                                    </div>
+                                </div>
+                                <span class="text-gray-700 font-medium group-hover:text-[#0ABAB5] transition-colors">4～8か月</span>
+                            </label>
+                            <label class="flex items-center space-x-3 cursor-pointer group">
+                                <div class="flex-shrink-0">
+                                    <input type="radio" name="experience" value="9～12か月" class="hidden peer">
+                                    <div class="w-5 h-5 border-2 border-gray-300 rounded-full flex items-center justify-center peer-checked:border-[#0ABAB5] bg-white transition-all">
+                                        <div class="w-2.5 h-2.5 bg-[#0ABAB5] rounded-full opacity-0 peer-checked:opacity-100 transition-all scale-50 peer-checked:scale-100"></div>
+                                    </div>
+                                </div>
+                                <span class="text-gray-700 font-medium group-hover:text-[#0ABAB5] transition-colors">9～12か月</span>
+                            </label>
+                            <label class="flex items-center space-x-3 cursor-pointer group">
+                                <div class="flex-shrink-0">
+                                    <input type="radio" name="experience" value="1年以上" class="hidden peer">
+                                    <div class="w-5 h-5 border-2 border-gray-300 rounded-full flex items-center justify-center peer-checked:border-[#0ABAB5] bg-white transition-all">
+                                        <div class="w-2.5 h-2.5 bg-[#0ABAB5] rounded-full opacity-0 peer-checked:opacity-100 transition-all scale-50 peer-checked:scale-100"></div>
+                                    </div>
+                                </div>
+                                <span class="text-gray-700 font-medium group-hover:text-[#0ABAB5] transition-colors">1年以上</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Q3 -->
+                    <div class="question-card">
+                        <h3 class="question-title">現在、身体について気になっている悩みはありますか？（複数回答可）<span class="required-mark">*</span></h3>
+                        <div class="space-y-3">
+                            <label class="flex items-start space-x-3 cursor-pointer group">
+                                <div class="flex-shrink-0 pt-0.5">
+                                    <input type="checkbox" name="concerns" value="肩こり" class="hidden peer">
+                                    <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center peer-checked:bg-[#0ABAB5] peer-checked:border-[#0ABAB5] bg-white transition-all">
+                                        <svg class="w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-all scale-50 peer-checked:scale-100" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                                    </div>
+                                </div>
+                                <span class="text-gray-700 font-medium group-hover:text-[#0ABAB5] transition-colors">肩こり</span>
+                            </label>
+                            <label class="flex items-start space-x-3 cursor-pointer group">
+                                <div class="flex-shrink-0 pt-0.5">
+                                    <input type="checkbox" name="concerns" value="腰痛" class="hidden peer">
+                                    <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center peer-checked:bg-[#0ABAB5] peer-checked:border-[#0ABAB5] bg-white transition-all">
+                                        <svg class="w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-all scale-50 peer-checked:scale-100" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                                    </div>
+                                </div>
+                                <span class="text-gray-700 font-medium group-hover:text-[#0ABAB5] transition-colors">腰痛</span>
+                            </label>
+                            <label class="flex items-start space-x-3 cursor-pointer group">
+                                <div class="flex-shrink-0 pt-0.5">
+                                    <input type="checkbox" name="concerns" value="猫背" class="hidden peer">
+                                    <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center peer-checked:bg-[#0ABAB5] peer-checked:border-[#0ABAB5] bg-white transition-all">
+                                        <svg class="w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-all scale-50 peer-checked:scale-100" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                                    </div>
+                                </div>
+                                <span class="text-gray-700 font-medium group-hover:text-[#0ABAB5] transition-colors">猫背</span>
+                            </label>
+                            <label class="flex items-start space-x-3 cursor-pointer group">
+                                <div class="flex-shrink-0 pt-0.5">
+                                    <input type="checkbox" name="concerns" value="反り腰" class="hidden peer">
+                                    <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center peer-checked:bg-[#0ABAB5] peer-checked:border-[#0ABAB5] bg-white transition-all">
+                                        <svg class="w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-all scale-50 peer-checked:scale-100" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                                    </div>
+                                </div>
+                                <span class="text-gray-700 font-medium group-hover:text-[#0ABAB5] transition-colors">反り腰</span>
+                            </label>
+                            <label class="flex items-start space-x-3 cursor-pointer group">
+                                <div class="flex-shrink-0 pt-0.5">
+                                    <input type="checkbox" name="concerns" value="体力の衰え・疲れやすさ" class="hidden peer">
+                                    <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center peer-checked:bg-[#0ABAB5] peer-checked:border-[#0ABAB5] bg-white transition-all">
+                                        <svg class="w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-all scale-50 peer-checked:scale-100" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                                    </div>
+                                </div>
+                                <span class="text-gray-700 font-medium group-hover:text-[#0ABAB5] transition-colors">体力の衰え・疲れやすさ</span>
+                            </label>
+                            <label class="flex items-start space-x-3 cursor-pointer group">
+                                <div class="flex-shrink-0 pt-0.5">
+                                    <input type="checkbox" name="concerns" value="柔軟性を高めたい" class="hidden peer">
+                                    <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center peer-checked:bg-[#0ABAB5] peer-checked:border-[#0ABAB5] bg-white transition-all">
+                                        <svg class="w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-all scale-50 peer-checked:scale-100" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                                    </div>
+                                </div>
+                                <span class="text-gray-700 font-medium group-hover:text-[#0ABAB5] transition-colors">柔軟性を高めたい</span>
+                            </label>
+                            <label class="flex items-start space-x-3 cursor-pointer group">
+                                <div class="flex-shrink-0 pt-0.5">
+                                    <input type="checkbox" name="concerns" value="ダイエット・ボディメイク" class="hidden peer">
+                                    <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center peer-checked:bg-[#0ABAB5] peer-checked:border-[#0ABAB5] bg-white transition-all">
+                                        <svg class="w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-all scale-50 peer-checked:scale-100" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                                    </div>
+                                </div>
+                                <span class="text-gray-700 font-medium group-hover:text-[#0ABAB5] transition-colors">ダイエット・ボディメイク</span>
+                            </label>
+                            <label class="flex items-start space-x-3 cursor-pointer group">
+                                <div class="flex-shrink-0 pt-0.5">
+                                    <input type="checkbox" name="concerns" value="運動不足解消" class="hidden peer">
+                                    <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center peer-checked:bg-[#0ABAB5] peer-checked:border-[#0ABAB5] bg-white transition-all">
+                                        <svg class="w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-all scale-50 peer-checked:scale-100" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                                    </div>
+                                </div>
+                                <span class="text-gray-700 font-medium group-hover:text-[#0ABAB5] transition-colors">運動不足解消</span>
+                            </label>
+                            <label class="flex items-start space-x-3 cursor-pointer group">
+                                <div class="flex-shrink-0 pt-0.5">
+                                    <input type="checkbox" name="concerns" value="リフレッシュ・ストレス解消" class="hidden peer">
+                                    <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center peer-checked:bg-[#0ABAB5] peer-checked:border-[#0ABAB5] bg-white transition-all">
+                                        <svg class="w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-all scale-50 peer-checked:scale-100" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                                    </div>
+                                </div>
+                                <span class="text-gray-700 font-medium group-hover:text-[#0ABAB5] transition-colors">リフレッシュ・ストレス解消</span>
+                            </label>
+                            
+                            <!-- その他 -->
+                            <div class="flex items-center space-x-3 pt-1">
+                                <label class="flex items-center space-x-3 cursor-pointer group flex-shrink-0">
+                                    <input type="checkbox" name="concerns" value="その他" class="hidden peer" id="concerns-other-check">
+                                    <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center peer-checked:bg-[#0ABAB5] peer-checked:border-[#0ABAB5] bg-white transition-all">
+                                        <svg class="w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-all scale-50 peer-checked:scale-100" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                                    </div>
+                                    <span class="text-gray-700 font-medium group-hover:text-[#0ABAB5] transition-colors whitespace-nowrap">その他:</span>
+                                </label>
+                                <input type="text" name="concerns_other" class="input-underline !h-10 !py-1 !px-3 text-sm flex-1" oninput="document.getElementById('concerns-other-check').checked = true;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Q4 -->
+                    <div class="question-card">
+                        <h3 class="question-title">「マシンピラティス（リフォーマー）」を続けている理由、ここが好き！と思うポイントを教えてください。<span class="required-mark">*</span></h3>
+                        <div class="space-y-3">
+                            <label class="flex items-start space-x-3 cursor-pointer group">
+                                <div class="flex-shrink-0 pt-0.5">
+                                    <input type="checkbox" name="reasons" value="マシンのサポートがあるから、運動が苦手でも動ける" class="hidden peer">
+                                    <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center peer-checked:bg-[#0ABAB5] peer-checked:border-[#0ABAB5] bg-white transition-all">
+                                        <svg class="w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-all scale-50 peer-checked:scale-100" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                                    </div>
+                                </div>
+                                <span class="text-gray-700 font-medium group-hover:text-[#0ABAB5] transition-colors">マシンのサポートがあるから、運動が苦手でも動ける</span>
+                            </label>
+                            <label class="flex items-start space-x-3 cursor-pointer group">
+                                <div class="flex-shrink-0 pt-0.5">
+                                    <input type="checkbox" name="reasons" value="バネの抵抗感がよくて楽しい" class="hidden peer">
+                                    <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center peer-checked:bg-[#0ABAB5] peer-checked:border-[#0ABAB5] bg-white transition-all">
+                                        <svg class="w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-all scale-50 peer-checked:scale-100" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                                    </div>
+                                </div>
+                                <span class="text-gray-700 font-medium group-hover:text-[#0ABAB5] transition-colors">バネの抵抗感がよくて楽しい</span>
+                            </label>
+                            <label class="flex items-start space-x-3 cursor-pointer group">
+                                <div class="flex-shrink-0 pt-0.5">
+                                    <input type="checkbox" name="reasons" value="普段使わない筋肉を使っている感覚がある" class="hidden peer">
+                                    <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center peer-checked:bg-[#0ABAB5] peer-checked:border-[#0ABAB5] bg-white transition-all">
+                                        <svg class="w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-all scale-50 peer-checked:scale-100" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                                    </div>
+                                </div>
+                                <span class="text-gray-700 font-medium group-hover:text-[#0ABAB5] transition-colors">普段使わない筋肉を使っている感覚がある</span>
+                            </label>
+                            <label class="flex items-start space-x-3 cursor-pointer group">
+                                <div class="flex-shrink-0 pt-0.5">
+                                    <input type="checkbox" name="reasons" value="身体の伸びを感じやすい" class="hidden peer">
+                                    <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center peer-checked:bg-[#0ABAB5] peer-checked:border-[#0ABAB5] bg-white transition-all">
+                                        <svg class="w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-all scale-50 peer-checked:scale-100" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                                    </div>
+                                </div>
+                                <span class="text-gray-700 font-medium group-hover:text-[#0ABAB5] transition-colors">身体の伸びを感じやすい</span>
+                            </label>
+                            <label class="flex items-start space-x-3 cursor-pointer group">
+                                <div class="flex-shrink-0 pt-0.5">
+                                    <input type="checkbox" name="reasons" value="インナーマッスルへの『効いてる感』がある" class="hidden peer">
+                                    <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center peer-checked:bg-[#0ABAB5] peer-checked:border-[#0ABAB5] bg-white transition-all">
+                                        <svg class="w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-all scale-50 peer-checked:scale-100" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                                    </div>
+                                </div>
+                                <span class="text-gray-700 font-medium group-hover:text-[#0ABAB5] transition-colors">インナーマッスルへの『効いてる感』がある</span>
+                            </label>
+                            <label class="flex items-start space-x-3 cursor-pointer group">
+                                <div class="flex-shrink-0 pt-0.5">
+                                    <input type="checkbox" name="reasons" value="集中して動くことで、頭の中がスッキリしてリフレッシュできる" class="hidden peer">
+                                    <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center peer-checked:bg-[#0ABAB5] peer-checked:border-[#0ABAB5] bg-white transition-all">
+                                        <svg class="w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-all scale-50 peer-checked:scale-100" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                                    </div>
+                                </div>
+                                <span class="text-gray-700 font-medium group-hover:text-[#0ABAB5] transition-colors">集中して動くことで、頭の中がスッキリしてリフレッシュできる</span>
+                            </label>
+                            <label class="flex items-start space-x-3 cursor-pointer group">
+                                <div class="flex-shrink-0 pt-0.5">
+                                    <input type="checkbox" name="reasons" value="効果がわかりやすい" class="hidden peer">
+                                    <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center peer-checked:bg-[#0ABAB5] peer-checked:border-[#0ABAB5] bg-white transition-all">
+                                        <svg class="w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-all scale-50 peer-checked:scale-100" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                                    </div>
+                                </div>
+                                <span class="text-gray-700 font-medium group-hover:text-[#0ABAB5] transition-colors">効果がわかりやすい</span>
+                            </label>
+
+                            <!-- その他 -->
+                            <div class="flex items-center space-x-3 pt-1">
+                                <label class="flex items-center space-x-3 cursor-pointer group flex-shrink-0">
+                                    <input type="checkbox" name="reasons" value="その他" class="hidden peer" id="reasons-other-check">
+                                    <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center peer-checked:bg-[#0ABAB5] peer-checked:border-[#0ABAB5] bg-white transition-all">
+                                        <svg class="w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-all scale-50 peer-checked:scale-100" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                                    </div>
+                                    <span class="text-gray-700 font-medium group-hover:text-[#0ABAB5] transition-colors whitespace-nowrap">その他:</span>
+                                </label>
+                                <input type="text" name="reasons_other" class="input-underline !h-10 !py-1 !px-3 text-sm flex-1" oninput="document.getElementById('reasons-other-check').checked = true;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Q5 -->
+                    <div class="question-card">
+                        <h3 class="question-title">「JOYFIT24経堂でなら続けられそう！」と思えた一番の理由は何ですか？<span class="required-mark">*</span></h3>
+                        <textarea name="q5" required placeholder="回答を入力" class="input-underline"></textarea>
+                    </div>
+
+                    <!-- Q6 -->
+                    <div class="question-card">
+                        <h3 class="question-title">実際にやってみて気づいた「リフォーマー」の良さはありますか？<span class="required-mark">*</span></h3>
+                        <textarea name="q6" required placeholder="回答を入力" class="input-underline"></textarea>
+                    </div>
+
+                    <!-- Q7 -->
+                    <div class="question-card">
+                        <h3 class="question-title">レッスンを受けた後や、日常生活で感じた「身体や心の変化」があれば教えてください。<span class="required-mark">*</span></h3>
+                        <textarea name="q7" required placeholder="回答を入力" class="input-underline"></textarea>
+                    </div>
+
+                    <!-- Q8 -->
+                    <div class="question-card">
+                        <h3 class="question-title">お気に入りのクラス、または今後受けてみたいクラスはどれですか？（複数回答可）<span class="required-mark">*</span></h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <label class="flex items-start space-x-3 cursor-pointer group">
+                                <div class="flex-shrink-0 pt-0.5">
+                                    <input type="checkbox" name="classes" value="トータルボディメイク★" class="hidden peer">
+                                    <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center peer-checked:bg-[#0ABAB5] peer-checked:border-[#0ABAB5] bg-white transition-all">
+                                        <svg class="w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-all scale-50 peer-checked:scale-100" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                                    </div>
+                                </div>
+                                <span class="text-gray-700 font-medium group-hover:text-[#0ABAB5] transition-colors">トータルボディメイク★</span>
+                            </label>
+                            <label class="flex items-start space-x-3 cursor-pointer group">
+                                <div class="flex-shrink-0 pt-0.5">
+                                    <input type="checkbox" name="classes" value="魅せるバック&アームズ★★" class="hidden peer">
+                                    <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center peer-checked:bg-[#0ABAB5] peer-checked:border-[#0ABAB5] bg-white transition-all">
+                                        <svg class="w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-all scale-50 peer-checked:scale-100" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                                    </div>
+                                </div>
+                                <span class="text-gray-700 font-medium group-hover:text-[#0ABAB5] transition-colors">魅せるバック&アームズ★★</span>
+                            </label>
+                            <label class="flex items-start space-x-3 cursor-pointer group">
+                                <div class="flex-shrink-0 pt-0.5">
+                                    <input type="checkbox" name="classes" value="ほぐす美肩★★" class="hidden peer">
+                                    <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center peer-checked:bg-[#0ABAB5] peer-checked:border-[#0ABAB5] bg-white transition-all">
+                                        <svg class="w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-all scale-50 peer-checked:scale-100" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                                    </div>
+                                </div>
+                                <span class="text-gray-700 font-medium group-hover:text-[#0ABAB5] transition-colors">ほぐす美肩★★</span>
+                            </label>
+                            <label class="flex items-start space-x-3 cursor-pointer group">
+                                <div class="flex-shrink-0 pt-0.5">
+                                    <input type="checkbox" name="classes" value="チェストオープン★★" class="hidden peer">
+                                    <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center peer-checked:bg-[#0ABAB5] peer-checked:border-[#0ABAB5] bg-white transition-all">
+                                        <svg class="w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-all scale-50 peer-checked:scale-100" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                                    </div>
+                                </div>
+                                <span class="text-gray-700 font-medium group-hover:text-[#0ABAB5] transition-colors">チェストオープン★★</span>
+                            </label>
+                            <label class="flex items-start space-x-3 cursor-pointer group">
+                                <div class="flex-shrink-0 pt-0.5">
+                                    <input type="checkbox" name="classes" value="ウエストシェイプ★★★" class="hidden peer">
+                                    <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center peer-checked:bg-[#0ABAB5] peer-checked:border-[#0ABAB5] bg-white transition-all">
+                                        <svg class="w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-all scale-50 peer-checked:scale-100" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                                    </div>
+                                </div>
+                                <span class="text-gray-700 font-medium group-hover:text-[#0ABAB5] transition-colors">ウエストシェイプ★★★</span>
+                            </label>
+                            <label class="flex items-start space-x-3 cursor-pointer group">
+                                <div class="flex-shrink-0 pt-0.5">
+                                    <input type="checkbox" name="classes" value="桃尻メイク★★★" class="hidden peer">
+                                    <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center peer-checked:bg-[#0ABAB5] peer-checked:border-[#0ABAB5] bg-white transition-all">
+                                        <svg class="w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-all scale-50 peer-checked:scale-100" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                                    </div>
+                                </div>
+                                <span class="text-gray-700 font-medium group-hover:text-[#0ABAB5] transition-colors">桃尻メイク★★★</span>
+                            </label>
+                            <label class="flex items-start space-x-3 cursor-pointer group">
+                                <div class="flex-shrink-0 pt-0.5">
+                                    <input type="checkbox" name="classes" value="魅せるバック&アームズVer2★★★" class="hidden peer">
+                                    <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center peer-checked:bg-[#0ABAB5] peer-checked:border-[#0ABAB5] bg-white transition-all">
+                                        <svg class="w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-all scale-50 peer-checked:scale-100" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                                    </div>
+                                </div>
+                                <span class="text-gray-700 font-medium group-hover:text-[#0ABAB5] transition-colors">魅せるバック&アームズVer2★★★</span>
+                            </label>
+                            <label class="flex items-start space-x-3 cursor-pointer group">
+                                <div class="flex-shrink-0 pt-0.5">
+                                    <input type="checkbox" name="classes" value="アーム&ショルダースタビリティー★★★" class="hidden peer">
+                                    <div class="w-5 h-5 border-2 border-gray-300 rounded flex items-center justify-center peer-checked:bg-[#0ABAB5] peer-checked:border-[#0ABAB5] bg-white transition-all">
+                                        <svg class="w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-all scale-50 peer-checked:scale-100" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" /></svg>
+                                    </div>
+                                </div>
+                                <span class="text-gray-700 font-medium group-hover:text-[#0ABAB5] transition-colors">アーム&ショルダースタビリティー★★★</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Q9 -->
+                    <div class="question-card">
+                        <h3 class="question-title">まだマシンピラティスを経験したことがない方へ、おすすめのメッセージをお願いします！<span class="required-mark">*</span></h3>
+                        <textarea name="q9" required placeholder="回答を入力" class="input-underline"></textarea>
+                    </div>
+
+                    <!-- Submit -->
+                    <div class="pt-6">
+                        <button type="submit" id="submit-button" class="btn-solid text-white font-black text-xl tracking-widest flex justify-center items-center">
+                            <span>アンケートを送信</span>
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+
+            <!-- Success Message -->
+            <div id="success-message" class="hidden text-center py-16">
+                <div class="w-24 h-24 bg-[#0ABAB5] rounded-full flex items-center justify-center mx-auto mb-8 shadow-xl text-white">
+                    <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                </div>
+                <h2 class="text-2xl md:text-3xl font-black text-gray-800 mb-4 leading-tight">アンケートにご回答いただき<br class="md:hidden">ありがとうございました。</h2>
+                <p class="text-gray-600 font-medium leading-relaxed">
+                    いただいたご意見は、今後のサービス向上や<br class="hidden md:inline">レッスンの充実に役立ててまいります。<br>
+                    引き続き、JOYFIT24経堂をよろしくお願いいたします。
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer-bar border-t border-white/10 mt-auto">
+        <div class="container mx-auto text-center">
+            <img src="joyfit_logo.png" alt="JOYFIT24" class="footer-logo-img">
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // ▼▼▼ ここにGASでデプロイしたウェブアプリのURLを設定します ▼▼▼
+            const GAS_WEB_APP_URL = 'ここにGASのデプロイURLを貼り付けます';
+
+            const form = document.getElementById('survey-form');
+            const submitButton = document.getElementById('submit-button');
+            const formContainer = document.getElementById('form-container');
+            const successMessage = document.getElementById('success-message');
+            const formSection = document.getElementById('form-section');
+
+            // --- 必須チェックボックスのカスタムバリデーション ---
+            // ※複数回答可の項目は、少なくとも1つ選択されているかチェックする
+            function validateCheckboxes(name) {
+                const checkboxes = document.querySelectorAll(`input[name="${name}"]`);
+                if (checkboxes.length === 0) return true; // 対象がない場合はOK
+                
+                // 「その他」のテキスト入力がある場合を考慮
+                const isChecked = Array.from(checkboxes).some(cb => cb.checked);
+                const firstCheckbox = checkboxes[0];
+                
+                if (!isChecked) {
+                    firstCheckbox.setCustomValidity('リスト内の項目のいずれかを選択してください。');
+                    return false;
+                } else {
+                    // 全てのエラーをクリア
+                    checkboxes.forEach(cb => cb.setCustomValidity(''));
+                    return true;
+                }
+            }
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                if (!GAS_WEB_APP_URL || GAS_WEB_APP_URL === 'ここにGASのデプロイURLを貼り付けます') {
+                    alert('エラー: GASウェブアプリのURLが設定されていません。');
+                    return;
+                }
+
+                // 独自バリデーション（複数回答必須項目のチェック）
+                let isValid = true;
+                isValid = validateCheckboxes('concerns') && isValid;
+                isValid = validateCheckboxes('reasons') && isValid;
+                isValid = validateCheckboxes('classes') && isValid;
+
+                // 標準のバリデーションを実行してエラーメッセージを表示
+                if (!form.reportValidity() || !isValid) {
+                    return;
+                }
+
+                // ボタンのローディング状態
+                submitButton.disabled = true;
+                submitButton.innerHTML = `
+                    <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    送信中...
+                `;
+                submitButton.classList.add('opacity-70');
+
+                // フォームデータの取得と整形
+                const formData = new FormData(form);
+                const data = {};
+                
+                // 複数選択のチェックボックス（concerns, reasons, classes）をカンマ区切りの文字列にまとめる
+                for (let [key, value] of formData.entries()) {
+                    if (key === 'concerns' || key === 'reasons' || key === 'classes') {
+                        if (!data[key]) {
+                            data[key] = [];
+                        }
+                        data[key].push(value);
+                    } else {
+                        data[key] = value;
+                    }
+                }
+                
+                // 配列をカンマ区切りの文字列に変換
+                ['concerns', 'reasons', 'classes'].forEach(key => {
+                    if (data[key]) {
+                        data[key] = data[key].join(', ');
+                    }
+                });
+
+                // GASへの送信処理
+                fetch(GAS_WEB_APP_URL, {
+                    method: 'POST',
+                    mode: 'no-cors', // クロスドメイン通信のため必須
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(() => {
+                    // 送信成功時の処理
+                    formContainer.classList.add('hidden');
+                    successMessage.classList.remove('hidden');
+                    formSection.scrollIntoView({ behavior: 'smooth' });
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('システムエラーが発生しました。再度お試しください。');
+                })
+                .finally(() => {
+                    // エラー時にボタンを元に戻す
+                    if(successMessage.classList.contains('hidden')) {
+                        submitButton.disabled = false;
+                        submitButton.innerHTML = '<span>アンケートを送信</span>';
+                        submitButton.classList.remove('opacity-70');
+                    }
+                });
+            });
+
+            // チェックボックスグループの状態が変わるたびにカスタムバリデーションをリセットする
+            const checkboxGroups = ['concerns', 'reasons', 'classes'];
+            checkboxGroups.forEach(name => {
+                const checkboxes = document.querySelectorAll(`input[name="${name}"]`);
+                checkboxes.forEach(cb => {
+                    cb.addEventListener('change', () => {
+                        checkboxes[0].setCustomValidity('');
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
